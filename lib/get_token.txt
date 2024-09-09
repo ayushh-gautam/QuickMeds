@@ -1,0 +1,4 @@
+  getToken() async {
+    String token = await PreferenceManager.get().getAccessToken();
+    log(token);
+  }

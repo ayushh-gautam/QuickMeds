@@ -1,0 +1,52 @@
+{
+    "status": true,
+    "product": {
+        "id": 16,
+        "productName": "rgeg",
+        "mrp": 400,
+        "sellingPrice": 350,
+        "brand": "wfw",
+        "productForm": "wf",
+        "uses": "fsfs",
+        "age": "Any",
+        "categoryId": 2,
+        "category": "Health Product",
+        "manufacturer": "sfs",
+        "consumeType": "fsfsf",
+        "expireDate": "2024-08-31",
+        "packagingDetails": "sfsf",
+        "images": [
+            "/uploads/1724865469237.png"
+        ],
+        "variants": [
+            {
+                "mrp": 400,
+                "stock": "Available",
+                "units": "30 tablets",
+                "sellingPrice": 350
+            },
+            {
+                "mrp": 400,
+                "stock": "Available",
+                "units": "60 tablets",
+                "sellingPrice": 350
+            }
+        ],
+        "composition": "dvd",
+        "productIntroduction": "dv",
+        "usesOfMedication": "dfvd",
+        "benefits": "dvszed",
+        "contradictions": "ewgweswg",
+        "isPrescriptionRequired": true,
+        "expertAdvice": {
+            "advice": "dgvds",
+            "avatar": "/uploads/1724865482922.png",
+            "doctorName": "dvd",
+            "designation": "dgvdsgv"
+        },
+        "totalSales": 0,
+        "substituteProducts": [],
+        "averageRating": null,
+        "reviews": []
+    }
+}

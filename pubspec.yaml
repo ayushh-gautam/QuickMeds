@@ -1,0 +1,75 @@
+name: quickmeds_user
+description: "A new Flutter project."
+publish_to: "none"
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.1.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  get: ^4.6.5
+  sizer: ^2.0.13
+  image_picker: ^1.0.8
+  flutter_svg: ^1.1.5
+  flutter_launcher_icons: ^0.13.1
+  flutter_native_splash: ^2.3.0
+  flutter_circular_text: ^0.3.1
+  fluttertoast: ^8.0.9
+  otp_text_field: ^1.1.3
+  shimmer: ^2.0.0
+  carousel_slider: ^4.2.1
+  shared_preferences: ^2.0.15
+  http: ^1.1.0
+  intl: ^0.17.0
+  dots_indicator: ^2.1.0
+  flutter_advanced_drawer: ^1.3.6
+  flutter_rating_bar: ^4.0.0
+  numberpicker: ^2.1.2
+  permission_handler: ^11.0.1
+
+  cupertino_icons: ^1.0.6
+  geolocator: ^11.1.0
+  geocoding: ^3.0.0
+  get_ip_address: ^0.0.6
+  file_picker: ^8.0.0+1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^3.0.0
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/App Icon.jpg"
+  min_sdk_android: 19
+  web:
+    generate: true
+    image_path: "assets/images/App Icon.jpg"
+    background_color: "#hexcode"
+    theme_color: "#hexcode"
+  windows:
+    generate: true
+    image_path: "assets/images/App Icon.jpg"
+    icon_size: 48 # min:48, max:256, default: 48
+
+flutter_native_splash:
+  color: "#ffffff"
+  image: assets/images/App Icon.jpg
+  android: true
+  ios: true
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+
+  fonts:
+    - family: AlbertSans-Regular
+      fonts:
+        - asset: assets/fonts/AlbertSans-Regular.ttf
+        - asset: assets/fonts/AlbertSans-Bold.ttf
+        - asset: assets/fonts/AlbertSans-SemiBold.ttf
