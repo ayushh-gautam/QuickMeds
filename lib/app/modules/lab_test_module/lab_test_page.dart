@@ -72,7 +72,9 @@ class LabTestPage extends GetView<LabTestController> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 GestureDetector(
-                                  onTap: () {},
+                                  onTap: () {
+                                    Get.toNamed(Routes.ORDERBY_PRESCRIPTION);
+                                  },
                                   child: SizedBox(
                                     height: 18.h,
                                     child: Column(
