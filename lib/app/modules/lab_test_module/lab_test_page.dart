@@ -163,10 +163,23 @@ class LabTestPage extends GetView<LabTestController> {
                           SizedBox(
                             height: 2.h,
                           ),
+
+                          ///---------------------------------------------------- apii integration//////
+
+                          // Obx(() {
+                          //   if (labTestController.labtestsModel == null) {
+                          //     return const Center(
+                          //       child: CircularProgressIndicator(),
+                          //     );
+                          //   }
+
+                          //   var labbTests =
+                          //       labTestController.labtestsModel.labTests;
+
                           SizedBox(
                             height: 42.h,
                             child: ListView.builder(
-                              itemCount: 10,
+                              itemCount: 5,
                               shrinkWrap: true,
                               scrollDirection: Axis.horizontal,
                               itemBuilder: (context, index) {
@@ -285,6 +298,7 @@ class LabTestPage extends GetView<LabTestController> {
                               },
                             ),
                           ),
+///////////////////////////////////////////////////////////////////////////////////////////
                           SizedBox(
                             height: 2.h,
                           ),

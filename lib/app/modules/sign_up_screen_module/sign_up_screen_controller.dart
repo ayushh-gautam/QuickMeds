@@ -18,10 +18,11 @@ class SignUpScreenController extends GetxController {
   TextEditingController nameController = TextEditingController();
   var isLoading = false.obs;
 
-  Future actualSignUp(String url, dynamic body) async {
+  // API call  within the controller
+  Future<dynamic> actualSignUp(String url, dynamic body) async {
     final Map<String, String> headers = {
       'Content-Type': 'application/json',
-      'X-Authorization': MyApi.apiKey,
+      'X-Authorization': MyApi.apiKey, 
     };
     try {
       final response = await http.post(
@@ -29,48 +30,59 @@ class SignUpScreenController extends GetxController {
         headers: headers,
         body: jsonEncode(body),
       );
-      log(response.statusCode.toString());
-      log(response.body);
+
+      // Logging for debugging purposes
+      log('Status Code: ${response.statusCode}');
+      log('Response Body: ${response.body}');
+
       if (response.statusCode == 200 || response.statusCode == 201) {
         return jsonDecode(response.body);
       } else {
-        final successMessageModel = successMessageModelFromJson(response.body);
+        
+        final successMessageModel = successMessageModelFromJson(response.body); 
         Get.snackbar(
-            "Error",
-            successMessageModel.message ??
-                'Error", "An unexpected error occurred.',
-            snackPosition: SnackPosition.BOTTOM);
+          "Error",
+          successMessageModel.message ?? "An unexpected error occurred.",
+          snackPosition: SnackPosition.BOTTOM,
+        );
       }
     } catch (e) {
-      log(e.toString());
+      log('Error: $e');
     }
   }
 
   void signUpUsers() async {
     if (!signUp.currentState!.validate()) return;
+
+    // Creating request body
     Map<String, dynamic> body = {
       "name": nameController.text,
-      "countryCode": "+91",
+      "countryCode": "+91", 
       "phone": phoneController.text,
     };
+
     try {
-      isLoading(true);
-      var response = await actualSignUp('/users.reg', body);
+      isLoading(true); 
+      var response = await actualSignUp('/users.reg', body); // API endpoint
+
       if (response != null) {
+      
         SendLoginDetailsModel sendLoginDetailsModel =
             SendLoginDetailsModel.fromJson(response);
+        
+        // Storing token in preferences
         String token = sendLoginDetailsModel.token!;
         PreferenceManager.get().setAccessToken(token);
-        Get.toNamed(Routes.VERIFICATION_SCREEN,
-            arguments: phoneController.text);
+        Get.toNamed(Routes.VERIFICATION_SCREEN, arguments: phoneController.text);
       }
     } catch (e) {
-      log(e.toString());
+      log('Error during sign-up: $e');
     } finally {
-      isLoading(false);
+      isLoading(false); 
     }
   }
 
+  // clean up the controllers when the screen is disposed of
   @override
   void onClose() {
     phoneController.dispose();

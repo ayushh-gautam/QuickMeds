@@ -10,7 +10,6 @@ import 'package:quickmeds_user/app/helper_widgets/text_widget.dart';
 import 'package:quickmeds_user/app/modules/drawer_screen_module/drawer_screen_page.dart';
 import 'package:quickmeds_user/app/utils/strings.dart';
 import 'package:sizer/sizer.dart';
-
 import '../../helper_widgets/hex_color.dart';
 import '../../helper_widgets/textfield_widget.dart';
 import '../../helper_widgets/validators.dart';

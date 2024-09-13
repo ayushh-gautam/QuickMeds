@@ -742,10 +742,7 @@ class CategoryScreenPage extends GetView<CategoryScreenController> {
                                                                 Center(
                                                                   child: Image
                                                                       .network(
-                                                                    MyApi.baseUrl +
-                                                                        medicines[index]
-                                                                            .images!
-                                                                            .first,
+                                                                    MyApi.baseUrl+medicines[index].images!.first,
                                                                     height:
                                                                         12.h,
                                                                   ),
