@@ -3,10 +3,10 @@ import 'package:quickmeds_user/api_collection/api_models/get_lab_test_by_id.dart
 import 'package:quickmeds_user/api_collection/repo/lab_test_repo.dart';
 
 class LabTestDetailController extends GetxController {
-  String labTestId = "1";
   // !Comment this id later on and get it from previous page
   RxBool isGetLoading = false.obs;
   GetLabTestByIdModel getLabTestByIdModel = GetLabTestByIdModel();
+  final String labTestId = Get.arguments;
 
   @override
   void onInit() {
@@ -20,6 +20,7 @@ class LabTestDetailController extends GetxController {
     try {
       isGetLoading.value = true;
       getLabTestByIdModel = await labTestRepo.getLabTestById(labTestId);
+      isGetLoading.value = false;
       return getLabTestByIdModel;
     } catch (e) {
       Get.snackbar(
