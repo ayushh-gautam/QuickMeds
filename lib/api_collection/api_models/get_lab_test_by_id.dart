@@ -43,8 +43,8 @@ class LabTest {
   String? preparations;
   String? sampleRequired;
   String? recommendedFor;
-  List<Other>? others;
-  List<Faq>? faq;
+  dynamic others;
+  dynamic faq;
 
   LabTest({
     this.id,
@@ -72,12 +72,8 @@ class LabTest {
         preparations: json["preparations"] ?? "",
         sampleRequired: json["sampleRequired"] ?? "",
         recommendedFor: json["recommendedFor"] ?? "",
-        others: json["others"] == null
-            ? []
-            : List<Other>.from(json["others"]!.map((x) => Other.fromJson(x))),
-        faq: json["faq"] == null
-            ? []
-            : List<Faq>.from(json["faq"]!.map((x) => Faq.fromJson(x))),
+        others: json["others"],
+        faq: json["faq"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -91,11 +87,8 @@ class LabTest {
         "preparations": preparations,
         "sampleRequired": sampleRequired,
         "recommendedFor": recommendedFor,
-        "others": others == null
-            ? []
-            : List<dynamic>.from(others!.map((x) => x.toJson())),
-        "faq":
-            faq == null ? [] : List<dynamic>.from(faq!.map((x) => x.toJson())),
+         "others": others,
+        "faq": faq,
       };
 }
 
