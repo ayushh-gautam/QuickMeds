@@ -899,36 +899,50 @@ class TabScreenPage extends GetView<TabScreenController> {
               },
             ),
             SizedBox(height: 2.4.h),
+
             TextWidget(
               text: "All cities",
               size: 12.sp,
               bold: FontWeight.w500,
               color: greyColor,
             ),
+
+            
+//-----------------------apiii integrate----------------------------------------////
+
             SizedBox(height: 2.4.h),
-            ListView.builder(
-              itemCount: 6,
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: EdgeInsets.only(bottom: 2.6.h),
-                  child: Row(
-                    children: [
-                      SvgPicture.asset("assets/images/location.svg",
-                          height: 2.8.h, color: greyColor),
-                      SizedBox(width: 4.w),
-                      TextWidget(
-                        text: "Mumbai",
-                        size: 12.sp,
-                        bold: FontWeight.w500,
-                        color: HexColor("#3B5664"),
-                      ),
-                    ],
-                  ),
+            Obx(() {
+              if (tabScreenController.isLoading.value) {
+                return const Center(
+                  child: CircularProgressIndicator(),
                 );
-              },
-            ),
+              }
+              var myaddress =
+                  tabScreenController.getAddressDetailModel.addresses!;
+              return ListView.builder(
+                itemCount: myaddress.length,
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: EdgeInsets.only(bottom: 2.6.h),
+                    child: Row(
+                      children: [
+                        SvgPicture.asset("assets/images/location.svg",
+                            height: 2.8.h, color: greyColor),
+                        SizedBox(width: 4.w),
+                        TextWidget(
+                          text: myaddress[index].city.toString(),
+                          size: 12.sp,
+                          bold: FontWeight.w500,
+                          color: HexColor("#3B5664"),
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              );
+            }),
             SizedBox(height: 1.6.h),
           ],
         ),
