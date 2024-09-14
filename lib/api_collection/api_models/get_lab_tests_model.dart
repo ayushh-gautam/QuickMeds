@@ -1,90 +1,78 @@
 // To parse this JSON data, do
-//
+
 //     final getLabTestsModel = getLabTestsModelFromJson(jsonString);
 
 import 'dart:convert';
 
-GetLabTestsModel getLabTestsModelFromJson(String str) =>
-    GetLabTestsModel.fromJson(json.decode(str));
+GetLabTestsModel getLabTestsModelFromJson(String str) => GetLabTestsModel.fromJson(json.decode(str));
 
-String getLabTestsModelToJson(GetLabTestsModel data) =>
-    json.encode(data.toJson());
+String getLabTestsModelToJson(GetLabTestsModel data) => json.encode(data.toJson());
 
 class GetLabTestsModel {
-  bool? status;
-  List<LabTest>? labTests;
+    bool? status;
+    List<LabTest>? labTests;
 
-  GetLabTestsModel({
-    this.status,
-    this.labTests,
-  });
+    GetLabTestsModel({
+         this.status,
+         this.labTests,
+    });
 
-  factory GetLabTestsModel.fromJson(Map<String, dynamic> json) =>
-      GetLabTestsModel(
-        status: json["status"] ?? false,
-        labTests: json["labTests"] == null
-            ? []
-            : List<LabTest>.from(
-                json["labTests"]!.map((x) => LabTest.fromJson(x))),
-      );
+    factory GetLabTestsModel.fromJson(Map<String, dynamic> json) => GetLabTestsModel(
+        status: json["status"],
+        labTests: List<LabTest>.from(json["labTests"].map((x) => LabTest.fromJson(x))),
+    );
 
-  Map<String, dynamic> toJson() => {
+    Map<String, dynamic> toJson() => {
         "status": status,
-        "labTests": labTests == null
-            ? []
-            : List<dynamic>.from(labTests!.map((x) => x.toJson())),
-      };
+        "labTests": List<dynamic>.from(labTests!.map((x) => x.toJson())),
+    };
 }
 
 class LabTest {
-  int? id;
-  String? bannerImage;
-  String? coverImage;
-  String? testName;
-  String? description;
-  double? mrp;
-  double? sellingPrice;
-  String? preparations;
-  String? sampleRequired;
-  String? recommendedFor;
-  List<Other>? others;
-  List<Faq>? faq;
+    int id;
+    String bannerImage;
+    String coverImage;
+    String testName;
+    String description;
+    double mrp;
+    double sellingPrice;
+    String preparations;
+    String sampleRequired;
+    String recommendedFor;
+    dynamic others;
+    dynamic faq;
 
-  LabTest({
-    this.id,
-    this.bannerImage,
-    this.coverImage,
-    this.testName,
-    this.description,
-    this.mrp,
-    this.sellingPrice,
-    this.preparations,
-    this.sampleRequired,
-    this.recommendedFor,
-    this.others,
-    this.faq,
-  });
+    LabTest({
+        required this.id,
+        required this.bannerImage,
+        required this.coverImage,
+        required this.testName,
+        required this.description,
+        required this.mrp,
+        required this.sellingPrice,
+        required this.preparations,
+        required this.sampleRequired,
+        required this.recommendedFor,
+        required this.others,
+        required this.faq,
+    });
 
-  factory LabTest.fromJson(Map<String, dynamic> json) => LabTest(
-        id: json["id"] ?? 0,
-        bannerImage: json["bannerImage"] ?? "",
-        coverImage: json["coverImage"] ?? "",
-        testName: json["testName"] ?? "",
-        description: json["description"] ?? "",
-        mrp: json["mrp"].toDouble() ?? 0.0,
-        sellingPrice: json["sellingPrice"].toDouble() ?? 0.0,
-        preparations: json["preparations"] ?? "",
-        sampleRequired: json["sampleRequired"] ?? "",
-        recommendedFor: json["recommendedFor"] ?? "",
-        others: json["others"] == null
-            ? []
-            : List<Other>.from(json["others"]!.map((x) => Other.fromJson(x))),
-        faq: json["faq"] == null
-            ? []
-            : List<Faq>.from(json["faq"]!.map((x) => Faq.fromJson(x))),
-      );
+    factory LabTest.fromJson(Map<String, dynamic> json) => LabTest(
+        id: json["id"],
+        bannerImage: json["bannerImage"],
+        coverImage: json["coverImage"],
+        testName: json["testName"],
+        description: json["description"],
+        mrp: json["mrp"]?.toDouble(),
+        sellingPrice: json["sellingPrice"]?.toDouble(),
+        preparations: json["preparations"],
+        sampleRequired: json["sampleRequired"],
+        recommendedFor: json["recommendedFor"],
+        others: json["others"],
+        faq: json["faq"],
+    );
 
-  Map<String, dynamic> toJson() => {
+    Map<String, dynamic> toJson() => {
         "id": id,
         "bannerImage": bannerImage,
         "coverImage": coverImage,
@@ -95,50 +83,51 @@ class LabTest {
         "preparations": preparations,
         "sampleRequired": sampleRequired,
         "recommendedFor": recommendedFor,
-        "others": others == null
-            ? []
-            : List<dynamic>.from(others!.map((x) => x.toJson())),
-        "faq":
-            faq == null ? [] : List<dynamic>.from(faq!.map((x) => x.toJson())),
-      };
+        "others": others,
+        "faq": faq,
+    };
 }
 
-class Faq {
-  String? answer;
-  String? question;
+class FaqElement {
+    String? ans;
+    String question;
+    String? answer;
 
-  Faq({
-    this.answer,
-    this.question,
-  });
+    FaqElement({
+        this.ans,
+        required this.question,
+        this.answer,
+    });
 
-  factory Faq.fromJson(Map<String, dynamic> json) => Faq(
-        answer: json["answer"] ?? "",
-        question: json["question"] ?? "",
-      );
+    factory FaqElement.fromJson(Map<String, dynamic> json) => FaqElement(
+        ans: json["ans"],
+        question: json["question"],
+        answer: json["answer"],
+    );
 
-  Map<String, dynamic> toJson() => {
-        "answer": answer,
+    Map<String, dynamic> toJson() => {
+        "ans": ans,
         "question": question,
-      };
+        "answer": answer,
+    };
 }
 
 class Other {
-  String? body;
-  String? heading;
+    String body;
+    String heading;
 
-  Other({
-    this.body,
-    this.heading,
-  });
+    Other({
+        required this.body,
+        required this.heading,
+    });
 
-  factory Other.fromJson(Map<String, dynamic> json) => Other(
-        body: json["body"] ?? "",
-        heading: json["heading"] ?? "",
-      );
+    factory Other.fromJson(Map<String, dynamic> json) => Other(
+        body: json["body"],
+        heading: json["heading"],
+    );
 
-  Map<String, dynamic> toJson() => {
+    Map<String, dynamic> toJson() => {
         "body": body,
         "heading": heading,
-      };
+    };
 }
