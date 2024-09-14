@@ -166,138 +166,150 @@ class LabTestPage extends GetView<LabTestController> {
 
                           ///---------------------------------------------------- apii integration//////
 
-                          // Obx(() {
-                          //   if (labTestController.labtestsModel == null) {
-                          //     return const Center(
-                          //       child: CircularProgressIndicator(),
-                          //     );
-                          //   }
+                          Obx(() {
+                            if (labTestController.isLoading.value) {
+                              return const Center(
+                                child: CircularProgressIndicator(),
+                              );
+                            }
 
-                          //   var labbTests =
-                          //       labTestController.labtestsModel.labTests;
+                            var labbTests =
+                                labTestController.labtestsModel.labTests!;
 
-                          SizedBox(
-                            height: 42.h,
-                            child: ListView.builder(
-                              itemCount: 5,
-                              shrinkWrap: true,
-                              scrollDirection: Axis.horizontal,
-                              itemBuilder: (context, index) {
-                                return GestureDetector(
-                                  onTap: () {
-                                    Get.toNamed(Routes.LAB_TEST_DETAIL);
-                                  },
-                                  child: Container(
-                                    width: 74.w,
-                                    margin: EdgeInsets.only(right: 1.h),
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius:
-                                          BorderRadius.circular(1.2.h),
-                                    ),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Image(
-                                          image: AssetImage(
-                                              "assets/images/browse.png"),
-                                          height: 18.h,
-                                          fit: BoxFit.cover,
-                                        ),
-                                        Padding(
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: 4.w, vertical: 1.6.h),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              TextWidget(
-                                                  text:
-                                                      "Fever package extensive (includes dengue, malaria, typhoid & chiku..",
-                                                  size: 12.sp,
-                                                  color: greyColor,
-                                                  bold: FontWeight.w600),
-                                              SizedBox(
-                                                height: 1.2.h,
-                                              ),
-                                              TextWidget(
-                                                text:
-                                                    "Get reports within 18 hrs",
-                                                size: 9.sp,
-                                                bold: FontWeight.w500,
-                                                color: greyColor,
-                                              ),
-                                              SizedBox(
-                                                height: 1.2.h,
-                                              ),
-                                              Row(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.center,
-                                                children: [
-                                                  TextWidget(
-                                                      text: "₹366",
-                                                      size: 16.sp,
-                                                      color: greyColor,
-                                                      bold: FontWeight.w800),
-                                                  SizedBox(
-                                                    width: 2.w,
-                                                  ),
-                                                  TextWidget(
-                                                    text: "₹999",
-                                                    size: 15.sp,
-                                                    color: greyColor,
-                                                    bold: FontWeight.w600,
-                                                    decoration: TextDecoration
-                                                        .lineThrough,
-                                                  ),
-                                                  SizedBox(
-                                                    width: 2.w,
-                                                  ),
-                                                  TextWidget(
-                                                    text: "55% off",
+                            return SizedBox(
+                              height: 42.h,
+                              child: ListView.builder(
+                                itemCount: labbTests.length,
+                                shrinkWrap: true,
+                                scrollDirection: Axis.horizontal,
+                                itemBuilder: (context, index) {
+                                  return GestureDetector(
+                                    onTap: () {
+                                      Get.toNamed(
+                                        Routes.LAB_TEST_DETAIL,
+                                        arguments: labbTests[index].id.toString(),
+                                      );
+                                    },
+                                    child: Container(
+                                      width: 74.w,
+                                      margin: EdgeInsets.only(right: 1.h),
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius:
+                                            BorderRadius.circular(1.2.h),
+                                      ),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Image(
+                                            image: const AssetImage(
+                                                "assets/images/browse.png"),
+                                            height: 18.h,
+                                            fit: BoxFit.cover,
+                                          ),
+                                          Padding(
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: 4.w,
+                                                vertical: 1.6.h),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                TextWidget(
+                                                    text: labbTests[index]
+                                                        .testName,
                                                     size: 12.sp,
-                                                    color: orangeColor,
-                                                    bold: FontWeight.w600,
-                                                  ),
-                                                ],
-                                              ),
-                                              SizedBox(
-                                                height: 2.h,
-                                              ),
-                                              GestureDetector(
-                                                onTap: () {
-                                                  Get.toNamed(Routes
-                                                      .ADD_MEDICINE_REMINDER);
-                                                },
-                                                child: Container(
-                                                  padding: EdgeInsets.symmetric(
-                                                      vertical: 1.6.h),
-                                                  decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              1.2.h),
-                                                      border: Border.all(
-                                                          color: orangeColor)),
-                                                  child: Center(
-                                                    child: TextWidget(
-                                                        text: "Book Now",
-                                                        size: 14.sp,
-                                                        color: orangeColor,
-                                                        bold: FontWeight.w400),
+                                                    color: greyColor,
+                                                    bold: FontWeight.w600),
+                                                SizedBox(
+                                                  height: 1.2.h,
+                                                ),
+                                                TextWidget(
+                                                  text:
+                                                      "Get reports within 18 hrs",
+                                                  size: 9.sp,
+                                                  bold: FontWeight.w500,
+                                                  color: greyColor,
+                                                ),
+                                                SizedBox(
+                                                  height: 1.2.h,
+                                                ),
+                                                Row(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.center,
+                                                  children: [
+                                                    TextWidget(
+                                                        text:
+                                                            "₹${labbTests[index].mrp.toString().split('.').first}",
+                                                        size: 16.sp,
+                                                        color: greyColor,
+                                                        bold: FontWeight.w800),
+                                                    SizedBox(
+                                                      width: 2.w,
+                                                    ),
+                                                    TextWidget(
+                                                      text:
+                                                          "₹${labbTests[index].sellingPrice.toString().split('.').first}",
+                                                      size: 15.sp,
+                                                      color: greyColor,
+                                                      bold: FontWeight.w600,
+                                                      decoration: TextDecoration
+                                                          .lineThrough,
+                                                    ),
+                                                    SizedBox(
+                                                      width: 2.w,
+                                                    ),
+                                                    TextWidget(
+                                                      text: "55% off",
+                                                      size: 12.sp,
+                                                      color: orangeColor,
+                                                      bold: FontWeight.w600,
+                                                    ),
+                                                  ],
+                                                ),
+                                                SizedBox(
+                                                  height: 2.h,
+                                                ),
+                                                GestureDetector(
+                                                  onTap: () {
+                                                    Get.toNamed(Routes
+                                                        .ADD_MEDICINE_REMINDER);
+                                                  },
+                                                  child: Container(
+                                                    padding:
+                                                        EdgeInsets.symmetric(
+                                                            vertical: 1.6.h),
+                                                    decoration: BoxDecoration(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(
+                                                                    1.2.h),
+                                                        border: Border.all(
+                                                            color:
+                                                                orangeColor)),
+                                                    child: Center(
+                                                      child: TextWidget(
+                                                          text: "Book Now",
+                                                          size: 14.sp,
+                                                          color: orangeColor,
+                                                          bold:
+                                                              FontWeight.w400),
+                                                    ),
                                                   ),
                                                 ),
-                                              ),
-                                            ],
-                                          ),
-                                        )
-                                      ],
+                                              ],
+                                            ),
+                                          )
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                );
-                              },
-                            ),
-                          ),
+                                  );
+                                },
+                              ),
+                            );
+                          }),
+
 ///////////////////////////////////////////////////////////////////////////////////////////
                           SizedBox(
                             height: 2.h,
