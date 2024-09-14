@@ -6,9 +6,8 @@ import 'package:quickmeds_user/api_collection/repo/lab_test_repo.dart';
  * */
 
 class LabTestController extends GetxController {
-  // var _obj = ''.obs;
+  var isLoading = false.obs;
   GetLabTestsModel labtestsModel = GetLabTestsModel();
-
   // set obj(value) => _obj.value = value;
   // get obj => _obj.value;
 
@@ -22,14 +21,20 @@ class LabTestController extends GetxController {
     LabTestRepo labtestRepo = LabTestRepo();
 
     try {
+      isLoading.value = true;
       labtestsModel = await labtestRepo.getLabTest();
       print("I Am Printer---------> $labtestsModel");
-
-      return labtestsModel ;
+      isLoading.value = false;
+      return labtestsModel;
     } catch (e) {
       Get.snackbar('Error', 'Failed to load tests, please try again :(',
           snackPosition: SnackPosition.BOTTOM);
     }
     throw Exception('try another year');
   }
+
+
+
+ 
+
 }
