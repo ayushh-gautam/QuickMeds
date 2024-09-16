@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 
 import 'package:quickmeds_user/app/helper_widgets/hex_color.dart';
 import 'package:quickmeds_user/app/helper_widgets/submit_button_helper.dart';
+import 'package:quickmeds_user/app/modules/choose_patient_module/choose_patient_controller.dart';
 import 'package:sizer/sizer.dart';
 import '../../helper_widgets/text_widget.dart';
 import '../../helper_widgets/textfield_widget.dart';
@@ -63,7 +64,9 @@ class AddPatientPage extends GetView<AddPatientController> {
                   padding: EdgeInsets.symmetric(vertical: 1.h, horizontal: 4.w),
                   child: SubmitButtonHelper(
                     onTap: () {
-                      Get.toNamed(Routes.BOOKING_SUCCESS);
+                      addPatientController.addPatient();
+                     
+                      Get.back();
                     },
                     text: "Continue",
                   ),
@@ -87,7 +90,8 @@ class AddPatientPage extends GetView<AddPatientController> {
                           fillColor: Colors.white,
                           textAlign: TextAlign.start,
                           textInputFormatter: const [],
-                          controller: TextEditingController(),
+                          controller:
+                              addPatientController.patientNameController,
                           borderColor: HexColor("#90A4AE"),
                           contentPadding: EdgeInsets.only(
                               top: 2.6.h, bottom: 2.8.h, left: 4.w, right: 4.w),
@@ -118,7 +122,7 @@ class AddPatientPage extends GetView<AddPatientController> {
                           fillColor: Colors.white,
                           textAlign: TextAlign.start,
                           textInputFormatter: const [],
-                          controller: TextEditingController(),
+                          controller: addPatientController.dobController,
                           suffixIcon: Padding(
                             padding: EdgeInsets.all(2.h),
                             child: SvgPicture.asset(
@@ -156,9 +160,16 @@ class AddPatientPage extends GetView<AddPatientController> {
                           scrollDirection: Axis.horizontal,
                           physics: const AlwaysScrollableScrollPhysics(),
                           itemBuilder: (BuildContext context, int index) {
-                            return GestureDetector(
-                              onTap: () {},
-                              child: Container(
+                            final gender = index == 0
+                                ? "Male"
+                                : index == 1
+                                    ? "Female"
+                                    : "Other";
+                            return GestureDetector(onTap: () {
+                              addPatientController.selectedGender.value =
+                                  gender;
+                            }, child: Obx(() {
+                              return Container(
                                 padding: EdgeInsets.symmetric(
                                     horizontal: 6.w, vertical: 0.2.h),
                                 margin: EdgeInsets.only(right: 4.w),
@@ -168,18 +179,18 @@ class AddPatientPage extends GetView<AddPatientController> {
                                 ),
                                 child: Center(
                                   child: TextWidget(
-                                    text: index == 0
-                                        ? "Male"
-                                        : index == 1
-                                            ? "Female"
-                                            : "Other",
+                                    text: gender,
                                     size: 12.sp,
-                                    color: greyColor,
+                                    color: addPatientController
+                                                .selectedGender.value ==
+                                            gender
+                                        ? Colors.orange
+                                        : greyColor,
                                     bold: FontWeight.w600,
                                   ),
                                 ),
-                              ),
-                            );
+                              );
+                            }));
                           },
                         ),
                       ),
