@@ -10,11 +10,21 @@ import '../../helper_widgets/text_widget.dart';
 import '../../routes/app_pages.dart';
 import '../../theme/app_colors.dart';
 
-class ChoosePatientPage extends GetView<ChoosePatientController> {
+class ChoosePatientPage extends StatefulWidget {
+  const ChoosePatientPage({super.key});
+
+  @override
+  State<ChoosePatientPage> createState() => _ChoosePatientPageState();
+}
+
+class _ChoosePatientPageState extends State<ChoosePatientPage> {
   final ChoosePatientController choosePatientController =
       Get.put<ChoosePatientController>(ChoosePatientController());
-
-  ChoosePatientPage({super.key});
+  @override
+  void initState() {
+    super.initState();
+    choosePatientController.getPatientList();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,87 +80,212 @@ class ChoosePatientPage extends GetView<ChoosePatientController> {
                   padding: EdgeInsets.only(left: 4.w, top: 1.h, right: 4.w),
                   child: ListView(
                     children: [
-                      ListView.builder(
-                        itemCount: 2,
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemBuilder: (context, index) {
-                          return Padding(
-                            padding: EdgeInsets.symmetric(vertical: 2.h),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    CircleAvatar(
-                                      radius: 4.h,
-                                      backgroundColor: Colors.white,
-                                      child: SvgPicture.asset(
-                                          "assets/images/person-outline.svg"),
-                                    ),
-                                    const SizedBox(
-                                        width:
-                                            16), // Add space between CircleAvatar and Column
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        TextWidget(
-                                          text: "Thor",
-                                          size: 13.sp,
-                                          color: greyColor,
-                                          bold: FontWeight.w600,
-                                        ),
-                                        TextWidget(
-                                          text: "Male,23",
-                                          size: 13.sp,
-                                          color: greyColor,
-                                          bold: FontWeight.w600,
-                                        ),
-                                        SizedBox(
-                                          height: 4.h,
-                                        ),
-                                        Row(
-                                          children: [
-                                            TextWidget(
-                                              text: "Edit",
-                                              size: 13.sp,
-                                              color: orangeColor,
-                                              bold: FontWeight.w600,
-                                            ),
-                                            SizedBox(
-                                              width: 8.w,
-                                            ),
-                                            TextWidget(
-                                              text: "Remove",
-                                              size: 13.sp,
-                                              color: orangeColor,
-                                              bold: FontWeight.w600,
-                                            ),
-                                          ],
-                                        )
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                                // Checkbox
-                                Checkbox(
-                                  activeColor: orangeColor,
-                                  value: choosePatientController
-                                      .checkedItems[index],
-                                  onChanged: (bool? value) {
-                                    choosePatientController
-                                        .checkedItems[index] = value ?? false;
-                                    choosePatientController.update();
-                                  },
-                                ),
-                              ],
-                            ),
+                      //////////////--------------API TO SHOW PATIENTS------------------////////////////
+                      Obx(() {
+                        if (choosePatientController.isLoading.value) {
+                          return const Center(
+                            child: CircularProgressIndicator(),
                           );
-                        },
-                      ),
+                        }
+
+                        var patientDetail =
+                            choosePatientController.getPatient?.value.patient;
+                        print(patientDetail?.length);
+                        return ListView.builder(
+                          itemCount: patientDetail?.length ?? 0,
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemBuilder: (context, index) {
+                            return Padding(
+                              padding: EdgeInsets.symmetric(vertical: 2.h),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      CircleAvatar(
+                                        radius: 4.h,
+                                        backgroundColor: Colors.white,
+                                        child: SvgPicture.asset(
+                                            "assets/images/person-outline.svg"),
+                                      ),
+                                      const SizedBox(
+                                          width:
+                                              16), // Add space between CircleAvatar and Column
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          TextWidget(
+                                            text: patientDetail?[index]
+                                                    .patientName ??
+                                                'Name not found',
+                                            size: 13.sp,
+                                            color: greyColor,
+                                            bold: FontWeight.w600,
+                                          ),
+                                          TextWidget(
+                                            text: patientDetail?[index]
+                                                    .gender ??
+                                                'N/A${(patientDetail?[index].dob ?? 'INvalid').toString().split(' ').first}',
+                                            size: 13.sp,
+                                            color: greyColor,
+                                            bold: FontWeight.w600,
+                                          ),
+                                          SizedBox(
+                                            height: 4.h,
+                                          ),
+                                          Row(
+                                            children: [
+                                              GestureDetector(
+                                                onTap: () {
+                                                  Get.dialog(
+                                                    AlertDialog(
+                                                      title: const Text(
+                                                          'Edit Patient Details'),
+                                                      content: Column(
+                                                        mainAxisSize:
+                                                            MainAxisSize.min,
+                                                        children: [
+                                                          TextField(
+                                                            controller:
+                                                                choosePatientController
+                                                                    .patientNameController,
+                                                            decoration:
+                                                                const InputDecoration(
+                                                                    labelText:
+                                                                        'Name'),
+                                                          ),
+
+                                                          // TextField(
+                                                          //   controller:
+                                                          //       choosePatientController.selectedGender,
+                                                          //   decoration:
+                                                          //       const InputDecoration(
+                                                          //           labelText:
+                                                          //               'Gender'),
+                                                          // ),
+                                                          TextField(
+                                                            controller:
+                                                                choosePatientController
+                                                                    .dobController,
+                                                            decoration:
+                                                                const InputDecoration(
+                                                                    labelText:
+                                                                        'DOB'),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      actions: [
+                                                        TextButton(
+                                                          onPressed: () =>
+                                                              Get.back(),
+                                                          child: const Text(
+                                                              'Cancel'),
+                                                        ),
+                                                        TextButton(
+                                                          onPressed: () {
+                                                            choosePatientController
+                                                                .updatePatient(
+                                                                    patientDetail?[index]
+                                                                            .id ??
+                                                                        22);
+                                                            Get.back();
+                                                          },
+                                                          child: const Text(
+                                                              'Update'),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  );
+                                                },
+                                                child: TextWidget(
+                                                  text: "Edit",
+                                                  size: 13.sp,
+                                                  color: orangeColor,
+                                                  bold: FontWeight.w600,
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: 8.w,
+                                              ),
+                                              GestureDetector(
+                                                onTap: () async {
+                                                  bool? confirm =
+                                                      await showDialog(
+                                                    context: context,
+                                                    builder:
+                                                        (BuildContext context) {
+                                                      return AlertDialog(
+                                                        title: const Text(
+                                                            'Confirm Deletion'),
+                                                        content: const Text(
+                                                            'Are you sure you want to delete this patient?'),
+                                                        actions: <Widget>[
+                                                          TextButton(
+                                                            onPressed: () =>
+                                                                Get.back(
+                                                                    result:
+                                                                        false),
+                                                            child: const Text(
+                                                                'Cancel'),
+                                                          ),
+                                                          TextButton(
+                                                            onPressed: () =>
+                                                                Get.back(
+                                                                    result:
+                                                                        true),
+                                                            child: const Text(
+                                                                'Delete'),
+                                                          ),
+                                                        ],
+                                                      );
+                                                    },
+                                                  );
+                                                  if (confirm == true) {
+                                                    await choosePatientController
+                                                        .deletePatient(
+                                                            patientDetail?[
+                                                                        index]
+                                                                    .id ??
+                                                                0);
+                                                  }
+                                                },
+                                                child: TextWidget(
+                                                  text: "Remove",
+                                                  size: 13.sp,
+                                                  color: orangeColor,
+                                                  bold: FontWeight.w600,
+                                                ),
+                                              )
+                                            ],
+                                          )
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                  // Checkbox
+                                  Checkbox(
+                                    activeColor: orangeColor,
+                                    value: choosePatientController.checkedItems(
+                                        patientDetail?.length ?? 0)[index],
+                                    onChanged: (bool? value) {
+                                      choosePatientController.checkedItems(
+                                          patientDetail?.length ??
+                                              0)[index] = value ?? false;
+                                      choosePatientController.update();
+                                    },
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
+                        );
+                      }),
                       SizedBox(
                         height: 2.h,
                       ),
