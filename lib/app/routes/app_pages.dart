@@ -1,3 +1,5 @@
+import 'package:quickmeds_user/app/modules/book_time_module/book_time_binding.dart';
+import 'package:quickmeds_user/app/modules/book_time_module/book_time_page.dart';
 import 'package:quickmeds_user/app/modules/edit_medicine_reminder_module/edit_medicine_reminder_bindings.dart';
 import 'package:quickmeds_user/app/modules/edit_medicine_reminder_module/edit_medicine_reminder_page.dart';
 import 'package:quickmeds_user/app/modules/edit_profile_screen_module/edit_profile_screen_bindings.dart';
@@ -368,5 +370,9 @@ abstract class AppPages {
       page: () => SearchScreenPage(),
       binding: SearchScreenBinding(),
     ),
+    GetPage(
+        name: Routes.BOOKTIME_SCREEN,
+        page: () => BookTimePage(),
+        binding: BookTimeBinding())
   ];
 }
