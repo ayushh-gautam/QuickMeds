@@ -19,7 +19,6 @@ class ChoosePatientController extends GetxController {
   GetPatient myPatientModel = GetPatient();
   @override
   void onInit() {
-    
     super.onInit();
   }
 
@@ -54,6 +53,8 @@ class ChoosePatientController extends GetxController {
           gender: selectedGender.value);
 
       await patientRepo.updatePatient(patientId, newPatient);
+      getPatientList();
+      update();
     } catch (e) {
       Get.snackbar('Exception', 'Error occurred, try again later');
     }
@@ -67,5 +68,12 @@ class ChoosePatientController extends GetxController {
     await patientRepo.deletePatient(patientId);
     getPatientList();
     update();
+  }
+
+  @override
+  void onClose() {
+    patientNameController.clear();
+    dobController.clear();
+    super.onClose();
   }
 }
