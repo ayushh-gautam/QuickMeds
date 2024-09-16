@@ -32,7 +32,8 @@ abstract class Routes {
       '/notification_screen'; // NotificationScreen page
   static const FAQ_SCREEN = '/faq_screen'; // FaqScreen page
   static const PROFILE_SCREEN = '/profile_screen'; // ProfileScreen page
-  static const EDIT_PROFILE_SCREEN = '/edit_profile_screen'; // EditProfileScreen page
+  static const EDIT_PROFILE_SCREEN =
+      '/edit_profile_screen'; // EditProfileScreen page
   static const PRIVACY_POLICY_SCREEN =
       '/privacy_policy_screen'; // PrivacyPolicyScreen page
   static const RETURN_POLICY_SCREEN =
@@ -68,5 +69,7 @@ abstract class Routes {
   static const BOOKING_SUMMARY = '/booking_summary'; // BookingSummary page
   static const BOOKING_SUCCESS = '/booking_success'; // BookingSuccess page
   static const MY_LAB_TEST = '/my_lab_test'; // MyLabTest page
-  static const SEARCH_SCREEN = '/search_screen'; // SearchScreen page
+  static const SEARCH_SCREEN = '/search_screen';
+
+  static const BOOKTIME_SCREEN = '/book_time';
 }
