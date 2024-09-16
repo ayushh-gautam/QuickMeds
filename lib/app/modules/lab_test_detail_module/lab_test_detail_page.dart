@@ -225,20 +225,25 @@ class LabTestDetailPage extends GetView<LabTestDetailController> {
                                     ),
                                   ],
                                 ),
-                                Container(
-                                  padding: EdgeInsets.symmetric(
-                                      vertical: 1.8.h, horizontal: 20.w),
-                                  decoration: BoxDecoration(
-                                      borderRadius:
-                                          BorderRadius.circular(1.2.h),
-                                      border:
-                                          Border.all(color: primaryGreenColor)),
-                                  child: Center(
-                                    child: TextWidget(
-                                        text: "Book",
-                                        size: 14.sp,
-                                        color: primaryGreenColor,
-                                        bold: FontWeight.w400),
+                                GestureDetector(
+                                  onTap: () {
+                                    Get.toNamed(Routes.BOOKTIME_SCREEN);
+                                  },
+                                  child: Container(
+                                    padding: EdgeInsets.symmetric(
+                                        vertical: 1.8.h, horizontal: 20.w),
+                                    decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(1.2.h),
+                                        border: Border.all(
+                                            color: primaryGreenColor)),
+                                    child: Center(
+                                      child: TextWidget(
+                                          text: "Book",
+                                          size: 14.sp,
+                                          color: primaryGreenColor,
+                                          bold: FontWeight.w400),
+                                    ),
                                   ),
                                 ),
                               ],
