@@ -487,6 +487,97 @@ class LabTestCartPage extends GetView<LabTestCartController> {
                     SizedBox(
                       height: 6.h,
                     ),
+
+                    //////////////////////////////////
+                    SubmitButtonHelper(
+                      text: 'Cancel Order',
+                      onTap: () {
+                        // Access the controller properly
+
+                        // Show Bottom Sheet
+                        showModalBottomSheet(
+                          context: context,
+                          isScrollControlled: true,
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.vertical(
+                              top: Radius.circular(20),
+                            ),
+                          ),
+                          builder: (BuildContext context) {
+                            return Padding(
+                              padding: const EdgeInsets.all(16),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      const Text(
+                                        'Reason for cancellation',
+                                        style: TextStyle(
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      IconButton(
+                                        icon: const Icon(Icons.close),
+                                        onPressed: () => Navigator.pop(context),
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 8),
+                                  const Text(
+                                    'Please select a reason for your cancellation below:',
+                                    style: TextStyle(fontSize: 16),
+                                  ),
+                                  const SizedBox(height: 16),
+                                  ListView.builder(
+                                    shrinkWrap: true,
+                                    itemCount: controller.reasons.length,
+                                    itemBuilder: (context, index) {
+                                      return Obx(() {
+                                        return RadioListTile<int>(
+                                          title:
+                                              Text(controller.reasons[index]),
+                                          value: index,
+                                          groupValue: controller
+                                              .selectedReasonIndex.value,
+                                          onChanged: (int? value) {
+                                            controller.selectReason(value!);
+                                          },
+                                        );
+                                      });
+                                    },
+                                  ),
+                                  const SizedBox(height: 16),
+                                  Obx(
+                                    () => SizedBox(
+                                      width: double.infinity,
+                                      child: SubmitButtonHelper(
+                                        text: 'Submit Cancellation',
+                                        onTap: controller.isButtonEnabled
+                                            ? () {
+                                                Navigator.pop(context);
+                                              }
+                                            : null,
+                                        color: controller.isButtonEnabled
+                                            ? primaryGreenColor
+                                            : greyColor,
+                                      ),
+                                    ),
+
+                                    ///   cotroller.isButtonEnabled
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
+                        );
+                      },
+                    )
+
+                    ////////////////////////////////
                   ],
                 ),
               ),
