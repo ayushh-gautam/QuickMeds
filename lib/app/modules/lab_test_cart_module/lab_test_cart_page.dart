@@ -494,6 +494,7 @@ class LabTestCartPage extends GetView<LabTestCartController> {
                       onTap: () {
                         // Show Bottom Sheet
                         showModalBottomSheet(
+                          useSafeArea: true,
                           context: context,
                           isScrollControlled: true,
                           builder: (BuildContext context) {
@@ -525,6 +526,9 @@ class LabTestCartPage extends GetView<LabTestCartController> {
                                     bold: FontWeight.normal,
                                     size: 18,
                                   ),
+                                 const SizedBox(
+                                    height: 8,
+                                  ),
                                   ListView.builder(
                                     physics:
                                         const NeverScrollableScrollPhysics(),
@@ -539,7 +543,7 @@ class LabTestCartPage extends GetView<LabTestCartController> {
                                         return Column(
                                           children: [
                                             const SizedBox(
-                                              height: 18,
+                                              height: 5,
                                             ),
                                             Container(
                                               width: double.infinity,
@@ -547,7 +551,7 @@ class LabTestCartPage extends GetView<LabTestCartController> {
                                               color: greyColor,
                                             ),
                                             const SizedBox(
-                                              height: 18,
+                                              height: 5,
                                             ),
                                             RadioListTile<int>(
                                               activeColor: orangeColor,
