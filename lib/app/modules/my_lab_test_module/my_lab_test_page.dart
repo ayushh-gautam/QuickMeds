@@ -15,7 +15,7 @@ class MyLabTestPage extends GetView<MyLabTestController> {
   final MyLabTestController myLabTestController =
       Get.find<MyLabTestController>();
 
-MyLabTestPage({super.key});
+  MyLabTestPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -66,11 +66,166 @@ MyLabTestPage({super.key});
                             textInputAction: TextInputAction.done),
                       ),
                     ),
-                    Padding(
-                      padding: EdgeInsets.only(top: 1.h),
-                      child: SvgPicture.asset(
-                        "assets/images/1.svg",
-                        height: 7.8.h,
+
+                    //filter
+                    GestureDetector(
+                      onTap: () {
+                        //show buttom sheet
+
+                        showModalBottomSheet(
+                            isScrollControlled: true,
+                            context: context,
+                            builder: (BuildContext context) {
+                              return SingleChildScrollView(
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        const TextWidget(
+                                            text: 'Booking status',
+                                            size: 20,
+                                            bold: FontWeight.w600),
+                                        IconButton(
+                                            onPressed: () {
+                                              Get.back();
+                                            },
+                                            icon: const Icon(Icons.close)),
+                                      ],
+                                    ),
+                                    Container(
+                                      width: double.infinity,
+                                      height: 0.5,
+                                      color: greyColor,
+                                    ).marginOnly(top: 18, bottom: 12),
+                                    Obx(() {
+                                      return ListView.builder(
+                                        physics:
+                                            const NeverScrollableScrollPhysics(),
+                                        shrinkWrap: true,
+                                        itemCount: myLabTestController
+                                            .bookingStatusChecked.length,
+                                        itemBuilder: (context, index) {
+                                          return Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            children: [
+                                              Checkbox(
+                                                activeColor: orangeColor,
+                                                value: controller
+                                                        .bookingStatusChecked[
+                                                    index],
+                                                onChanged: (value) {
+                                                  controller
+                                                      .toggleBookingStatusCheckbox(
+                                                          index);
+                                                },
+                                              ),
+                                              TextWidget(
+                                                text: controller
+                                                    .bookingStatusData[index],
+                                                size: 18,
+                                                color: myLabTestController
+                                                            .bookingStatusChecked[
+                                                        index]
+                                                    ? orangeColor
+                                                    : Colors.black,
+                                                bold: FontWeight.normal,
+                                              ),
+                                            ],
+                                          ).marginOnly(bottom: 24);
+                                        },
+                                      );
+                                    }),
+                                    const TextWidget(
+                                        text: 'Booking time',
+                                        size: 20,
+                                        bold: FontWeight.w600),
+                                    Container(
+                                      width: double.infinity,
+                                      height: 0.5,
+                                      color: greyColor,
+                                    ).marginOnly(top: 18, bottom: 12),
+                                    Obx(() {
+                                      return ListView.builder(
+                                        physics:
+                                            const NeverScrollableScrollPhysics(),
+                                        shrinkWrap: true,
+                                        itemCount: myLabTestController
+                                            .bookingTimeChecked.length,
+                                        itemBuilder: (context, index) {
+                                          return Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            children: [
+                                              Checkbox(
+                                                activeColor: orangeColor,
+                                                value: controller
+                                                    .bookingTimeChecked[index],
+                                                onChanged: (value) {
+                                                  controller
+                                                      .toggleBookingTimeCheckbox(
+                                                          index);
+                                                },
+                                              ),
+                                              TextWidget(
+                                                text: controller
+                                                    .bookingTimeData[index],
+                                                color: myLabTestController
+                                                            .bookingTimeChecked[
+                                                        index]
+                                                    ? orangeColor
+                                                    : Colors.black,
+                                                size: 18,
+                                                bold: FontWeight.normal,
+                                              ),
+                                            ],
+                                          ).marginOnly(bottom: 24);
+                                        },
+                                      );
+                                    }),
+                                    const SizedBox(
+                                      height: 4,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        GestureDetector(
+                                          onTap: () {
+                                            myLabTestController
+                                                .clearAllCheckboxes();
+                                          },
+                                          child: TextWidget(
+                                            text: 'Clear all',
+                                            size: 20,
+                                            bold: FontWeight.normal,
+                                            color: greyColor,
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 255,
+                                          child: SubmitButtonHelper(
+                                              color: primaryGreenColor,
+                                              text: 'Apply',
+                                              onTap: () {}),
+                                        )
+                                      ],
+                                    )
+                                  ],
+                                ).marginSymmetric(horizontal: 18, vertical: 18),
+                              );
+                            });
+                      },
+                      child: Padding(
+                        padding: EdgeInsets.only(top: 1.h),
+                        child: SvgPicture.asset(
+                          "assets/images/1.svg",
+                          height: 7.8.h,
+                        ),
                       ),
                     ),
                     SizedBox(
