@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -65,7 +66,7 @@ class AddPatientPage extends GetView<AddPatientController> {
                   child: SubmitButtonHelper(
                     onTap: () {
                       addPatientController.addPatient();
-                     
+
                       Get.back();
                     },
                     text: "Continue",
@@ -124,10 +125,23 @@ class AddPatientPage extends GetView<AddPatientController> {
                           textInputFormatter: const [],
                           controller: addPatientController.dobController,
                           suffixIcon: Padding(
-                            padding: EdgeInsets.all(2.h),
-                            child: SvgPicture.asset(
-                                "assets/images/calendar-outline.svg"),
-                          ),
+                              padding: EdgeInsets.all(2.h),
+                              child: GestureDetector(
+                                  onTap: () async {
+                                    DateTime? pickedDate = await showDatePicker(
+                                        context: context,
+                                        initialDate: DateTime.now(),
+                                        firstDate: DateTime(1900),
+                                        lastDate: DateTime.now());
+
+                                    if (pickedDate != null) {
+                                      String formattedDate =
+                                          "${pickedDate.year}-${pickedDate.month}-${pickedDate.day}";
+                                      addPatientController.dobController.text =
+                                          formattedDate;
+                                    }
+                                  },
+                                  child: const Icon(CupertinoIcons.calendar))),
                           borderColor: HexColor("#90A4AE"),
                           contentPadding: EdgeInsets.only(
                               top: 2.6.h, bottom: 2.8.h, left: 4.w, right: 4.w),
