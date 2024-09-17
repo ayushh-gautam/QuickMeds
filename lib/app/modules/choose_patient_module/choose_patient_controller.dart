@@ -11,16 +11,13 @@ class ChoosePatientController extends GetxController {
 
   final patientNameController = TextEditingController();
   final dobController = TextEditingController();
-  var selectedGender = 'Male'.obs;
+  var selectedGender = ''.obs;
   var isLoading = false.obs;
 
   Rx<GetPatient>? getPatient = GetPatient().obs;
 
   GetPatient myPatientModel = GetPatient();
-  @override
-  void onInit() {
-    super.onInit();
-  }
+
 
 /////------------------------GetList of Patient-----------------------------///
   Future<GetPatient> getPatientList() async {
