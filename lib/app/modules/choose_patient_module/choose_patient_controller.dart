@@ -18,7 +18,6 @@ class ChoosePatientController extends GetxController {
 
   GetPatient myPatientModel = GetPatient();
 
-
 /////------------------------GetList of Patient-----------------------------///
   Future<GetPatient> getPatientList() async {
     getPatient?.value = GetPatient();
@@ -53,7 +52,8 @@ class ChoosePatientController extends GetxController {
       getPatientList();
       update();
     } catch (e) {
-      Get.snackbar('Exception', 'Error occurred, try again later');
+      Get.snackbar('Exception', 'Error occurred, try again later',
+          snackPosition: SnackPosition.BOTTOM);
     }
   }
 

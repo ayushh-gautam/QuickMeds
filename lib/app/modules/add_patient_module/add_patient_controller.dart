@@ -24,7 +24,8 @@ class AddPatientController extends GetxController {
 
       await patientRepo.addPatient(newPatient);
     } catch (e) {
-      Get.snackbar('Exception', 'Error occurred, try again later');
+      Get.snackbar('Exception', 'Error occurred, try again later',
+          snackPosition: SnackPosition.BOTTOM);
     }
   }
 
