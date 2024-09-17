@@ -18,13 +18,15 @@ class PatientRepo {
         body: jsonEncode(newPatient.toJson()),
       );
       if (response.statusCode == 200 || response.statusCode == 201) {
-        Get.snackbar('Success', 'Patient added successfully');
-
+        Get.snackbar('Success', 'Patient added successfully',
+            snackPosition: SnackPosition.BOTTOM);
       } else {
-        Get.snackbar('Error', 'Error while adding patient: ${response.body}');
+        Get.snackbar('Error', 'Error while adding patient: ${response.body}',
+            snackPosition: SnackPosition.BOTTOM);
       }
     } catch (e) {
-      Get.snackbar('Exception', 'Error occurred, try again later');
+      Get.snackbar('Exception', 'Error occurred, try again later',
+          snackPosition: SnackPosition.BOTTOM);
     }
   }
 
@@ -67,7 +69,8 @@ class PatientRepo {
       log(response.statusCode.toString());
       log(response.body);
       if (response.statusCode == 200 || response.statusCode == 201) {
-        Get.snackbar('Success', 'Detail updated successfully');
+        Get.snackbar('Success', 'Detail updated successfully',
+            snackPosition: SnackPosition.BOTTOM);
       } else {
         final successMessageModel = successMessageModelFromJson(response.body);
         Get.snackbar('Error',
@@ -76,7 +79,8 @@ class PatientRepo {
       }
     } catch (e) {
       log("API Error: ${e.toString()}");
-      Get.snackbar('Exception', 'Error occurred, try again later');
+      Get.snackbar('Exception', 'Error occurred, try again later',
+          snackPosition: SnackPosition.BOTTOM);
     }
   }
 
@@ -88,9 +92,11 @@ class PatientRepo {
         headers: MyApi.postHeaders,
       );
       if (response.statusCode == 200 || response.statusCode == 201) {
-        Get.snackbar('Success', 'Patient removed successfully');
+        Get.snackbar('Success', 'Patient removed successfully',
+            snackPosition: SnackPosition.BOTTOM);
       } else {
-        Get.snackbar('Error', 'Error while removing patient: ${response.body}');
+        Get.snackbar('Error', 'Error while removing patient: ${response.body}',
+            snackPosition: SnackPosition.BOTTOM);
       }
     } catch (e) {
       Get.snackbar('Exception', 'Error occurred, try again later');
