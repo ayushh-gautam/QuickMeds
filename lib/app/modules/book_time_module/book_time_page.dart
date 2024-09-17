@@ -13,20 +13,6 @@ class BookTimePage extends GetView<BookTimeController> {
 
   @override
   Widget build(BuildContext context) {
-    List<String> names = [
-      "1:00 pm - 2:00 pm",
-      "2:00 pm - 3:00 pm",
-      "3:00 pm - 4:00 pm",
-      "4:00 pm - 5:00 pm",
-      "5:00 pm - 6:00 pm",
-    ];
-    List<String> pricing = [
-      "₹19",
-      "₹20",
-      "₹15",
-      "₹19",
-      "₹19",
-    ];
     return GetBuilder(
         init: bookTimeController,
         builder: (logic) {
@@ -68,7 +54,6 @@ class BookTimePage extends GetView<BookTimeController> {
               child: SubmitButtonHelper(
                 text: 'Continue',
                 onTap: () {
-                  
                   Get.toNamed(Routes.CHOOSE_PATIENT);
                 },
                 color: primaryGreenColor,
@@ -130,33 +115,43 @@ class BookTimePage extends GetView<BookTimeController> {
                 ).marginOnly(top: 10, bottom: 10),
                 ListView.builder(
                   shrinkWrap: true,
-                  itemCount: names.length,
+                  itemCount: bookTimeController.times.length,
                   itemBuilder: (context, index) {
-                    bool isSelected =
-                        bookTimeController.selectedIndex.value == index;
-                    return ListTile(
-                        onTap: () {
-                          bookTimeController.selectTile(index);
-                        },
-                        leading: const Icon(Icons.circle),
-                        title: TextWidget(
-                          text: names[index],
-                          size: 18,
-                          bold: FontWeight.w500,
-                          color: isSelected ? Colors.black : greyColor,
-                        ),
-                        trailing: TextWidget(
-                          text: pricing[index],
-                          size: 18,
-                          bold: FontWeight.normal,
-                          color: isSelected ? Colors.black : greyColor,
-                        ),
-                        shape: Border(
-                          bottom: BorderSide(
-                            color: Colors.grey.shade300, // Line color
-                            width: 1.0, // Line thickness
+                    return Obx(() {
+                      bool isSelected =
+                          bookTimeController.selectedIndex.value == index;
+                      return ListTile(
+                          onTap: () {
+                            bookTimeController.selectTile(index);
+                          },
+                          leading: Radio<int>(
+                            value: index,
+                            groupValue: bookTimeController.selectedIndex.value,
+                            onChanged: (value) {
+                              bookTimeController.selectTile(
+                                  index); // Update selected radio button
+                            },
+                            activeColor: Colors.orange, // Custom active color
                           ),
-                        ));
+                          title: TextWidget(
+                            text: bookTimeController.times[index],
+                            size: 18,
+                            bold: FontWeight.w500,
+                            color: isSelected ? Colors.black : greyColor,
+                          ),
+                          trailing: TextWidget(
+                            text: bookTimeController.pricing[index],
+                            size: 18,
+                            bold: FontWeight.normal,
+                            color: isSelected ? Colors.black : greyColor,
+                          ),
+                          shape: Border(
+                            bottom: BorderSide(
+                              color: Colors.grey.shade300, // Line color
+                              width: 1.0, // Line thickness
+                            ),
+                          ));
+                    });
                   },
                 ).marginSymmetric(horizontal: 10),
               ],
