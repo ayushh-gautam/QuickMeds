@@ -153,6 +153,8 @@ class _ChoosePatientPageState extends State<ChoosePatientPage> {
                                                         patientDetail?[index]
                                                                 .patientName ??
                                                             'Invalid Name',
+
+                                                            dateTime: patientDetail?[index].dob ?? DateTime.now(),
                                                   ));
                                                 },
                                                 child: TextWidget(
