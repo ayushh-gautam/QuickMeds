@@ -492,20 +492,12 @@ class LabTestCartPage extends GetView<LabTestCartController> {
                     SubmitButtonHelper(
                       text: 'Cancel Order',
                       onTap: () {
-                        // Access the controller properly
-
                         // Show Bottom Sheet
                         showModalBottomSheet(
                           context: context,
                           isScrollControlled: true,
-                          shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.vertical(
-                              top: Radius.circular(20),
-                            ),
-                          ),
                           builder: (BuildContext context) {
-                            return Padding(
-                              padding: const EdgeInsets.all(16),
+                            return SingleChildScrollView(
                               child: Column(
                                 mainAxisSize: MainAxisSize.min,
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -527,25 +519,56 @@ class LabTestCartPage extends GetView<LabTestCartController> {
                                     ],
                                   ),
                                   const SizedBox(height: 8),
-                                  const Text(
-                                    'Please select a reason for your cancellation below:',
-                                    style: TextStyle(fontSize: 16),
+                                  const TextWidget(
+                                    text:
+                                        'Please select a reason for  cancellation. This helps us to improve our service',
+                                    bold: FontWeight.normal,
+                                    size: 18,
                                   ),
-                                  const SizedBox(height: 16),
                                   ListView.builder(
+                                    physics:
+                                        const NeverScrollableScrollPhysics(),
                                     shrinkWrap: true,
                                     itemCount: controller.reasons.length,
+                                    padding: const EdgeInsets.all(0),
                                     itemBuilder: (context, index) {
                                       return Obx(() {
-                                        return RadioListTile<int>(
-                                          title:
-                                              Text(controller.reasons[index]),
-                                          value: index,
-                                          groupValue: controller
-                                              .selectedReasonIndex.value,
-                                          onChanged: (int? value) {
-                                            controller.selectReason(value!);
-                                          },
+                                        bool isSelected = index ==
+                                            controller
+                                                .selectedReasonIndex.value;
+                                        return Column(
+                                          children: [
+                                            const SizedBox(
+                                              height: 18,
+                                            ),
+                                            Container(
+                                              width: double.infinity,
+                                              height: 0.5,
+                                              color: greyColor,
+                                            ),
+                                            const SizedBox(
+                                              height: 18,
+                                            ),
+                                            RadioListTile<int>(
+                                              activeColor: orangeColor,
+                                              contentPadding:
+                                                  const EdgeInsets.all(0),
+                                              title: TextWidget(
+                                                text: controller.reasons[index],
+                                                size: 16,
+                                                bold: FontWeight.normal,
+                                                color: isSelected
+                                                    ? Colors.black
+                                                    : greyColor,
+                                              ),
+                                              value: index,
+                                              groupValue: controller
+                                                  .selectedReasonIndex.value,
+                                              onChanged: (int? value) {
+                                                controller.selectReason(value!);
+                                              },
+                                            ),
+                                          ],
                                         );
                                       });
                                     },
@@ -566,11 +589,9 @@ class LabTestCartPage extends GetView<LabTestCartController> {
                                             : greyColor,
                                       ),
                                     ),
-
-                                    ///   cotroller.isButtonEnabled
                                   ),
                                 ],
-                              ),
+                              ).marginSymmetric(horizontal: 18, vertical: 18),
                             );
                           },
                         );
