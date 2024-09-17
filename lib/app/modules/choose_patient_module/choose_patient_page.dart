@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:quickmeds_user/app/helper_widgets/submit_button_helper.dart';
+import 'package:quickmeds_user/app/modules/edit_patient_module/edit_patient_page.dart';
 import 'package:sizer/sizer.dart';
 
 import 'package:quickmeds_user/app/modules/choose_patient_module/choose_patient_controller.dart';
@@ -143,65 +144,16 @@ class _ChoosePatientPageState extends State<ChoosePatientPage> {
                                             children: [
                                               GestureDetector(
                                                 onTap: () {
-                                                  Get.dialog(
-                                                    AlertDialog(
-                                                      title: const Text(
-                                                          'Edit Patient Details'),
-                                                      content: Column(
-                                                        mainAxisSize:
-                                                            MainAxisSize.min,
-                                                        children: [
-                                                          TextField(
-                                                            controller:
-                                                                choosePatientController
-                                                                    .patientNameController,
-                                                            decoration:
-                                                                const InputDecoration(
-                                                                    labelText:
-                                                                        'Name'),
-                                                          ),
-
-                                                          // TextField(
-                                                          //   controller:
-                                                          //       choosePatientController.selectedGender,
-                                                          //   decoration:
-                                                          //       const InputDecoration(
-                                                          //           labelText:
-                                                          //               'Gender'),
-                                                          // ),
-                                                          TextField(
-                                                            controller:
-                                                                choosePatientController
-                                                                    .dobController,
-                                                            decoration:
-                                                                const InputDecoration(
-                                                                    labelText:
-                                                                        'DOB'),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                      actions: [
-                                                        TextButton(
-                                                          onPressed: () =>
-                                                              Get.back(),
-                                                          child: const Text(
-                                                              'Cancel'),
-                                                        ),
-                                                        TextButton(
-                                                          onPressed: () {
-                                                            choosePatientController
-                                                                .updatePatient(
-                                                                    patientDetail?[index]
-                                                                            .id ??
-                                                                        22);
-                                                            Get.back();
-                                                          },
-                                                          child: const Text(
-                                                              'Update'),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  );
+                                                  Get.to(EditPatientPage(
+                                                    patientId:
+                                                        patientDetail?[index]
+                                                                .id ??
+                                                            00,
+                                                    patientName:
+                                                        patientDetail?[index]
+                                                                .patientName ??
+                                                            'Invalid Name',
+                                                  ));
                                                 },
                                                 child: TextWidget(
                                                   text: "Edit",
