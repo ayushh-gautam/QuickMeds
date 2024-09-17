@@ -526,7 +526,7 @@ class LabTestCartPage extends GetView<LabTestCartController> {
                                     bold: FontWeight.normal,
                                     size: 18,
                                   ),
-                                 const SizedBox(
+                                  const SizedBox(
                                     height: 8,
                                   ),
                                   ListView.builder(
@@ -585,7 +585,35 @@ class LabTestCartPage extends GetView<LabTestCartController> {
                                         text: 'Submit Cancellation',
                                         onTap: controller.isButtonEnabled
                                             ? () {
-                                                Navigator.pop(context);
+                                                showDialog(
+                                                  barrierDismissible: false,
+                                                  context: context,
+                                                  builder: (context) {
+                                                    return AlertDialog(
+                                                      insetPadding:
+                                                          EdgeInsets.symmetric(
+                                                              horizontal: 10.w),
+                                                      backgroundColor:
+                                                          Colors.white,
+                                                      shape:
+                                                          RoundedRectangleBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(2.h),
+                                                      ),
+                                                      content: Image(
+                                                        image: const AssetImage(
+                                                            "assets/images/cancel_order.png"),
+                                                        height: 40.h,
+                                                      ),
+                                                    );
+                                                  },
+                                                ).then((value) {
+                                                  // Use Get.back() outside of the showDialog callback
+
+                                                  Get.back(closeOverlays: true);
+                                                  Get.back();
+                                                });
                                               }
                                             : null,
                                         color: controller.isButtonEnabled
