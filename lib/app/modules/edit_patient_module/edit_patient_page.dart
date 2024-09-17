@@ -1,21 +1,25 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:quickmeds_user/app/helper_widgets/hex_color.dart';
 import 'package:quickmeds_user/app/helper_widgets/submit_button_helper.dart';
 import 'package:quickmeds_user/app/helper_widgets/text_widget.dart';
 import 'package:quickmeds_user/app/helper_widgets/textfield_widget.dart';
-import 'package:quickmeds_user/app/modules/choose_patient_module/choose_patient_bindings.dart';
 import 'package:quickmeds_user/app/modules/choose_patient_module/choose_patient_controller.dart';
 import 'package:quickmeds_user/app/theme/app_colors.dart';
 import 'package:sizer/sizer.dart';
 
 class EditPatientPage extends StatefulWidget {
   const EditPatientPage(
-      {super.key, required this.patientId, required this.patientName});
+      {super.key,
+      required this.patientId,
+      required this.patientName,
+      required this.dateTime});
 
   final int patientId;
   final String patientName;
+
+  final DateTime dateTime;
 
   @override
   State<EditPatientPage> createState() => _EditPatientPageState();
@@ -113,15 +117,29 @@ class _EditPatientPageState extends State<EditPatientPage> {
               ),
               TextFieldWidget(
                   labelTextFontWeight: FontWeight.w600,
-                  hintText: "Enter  date of birth",
+                  hintText: widget.dateTime.toIso8601String().split('T').first,
                   fillColor: Colors.white,
                   textAlign: TextAlign.start,
                   textInputFormatter: const [],
                   controller: choosePatientController.dobController,
                   suffixIcon: Padding(
                     padding: EdgeInsets.all(2.h),
-                    child:
-                        SvgPicture.asset("assets/images/calendar-outline.svg"),
+                    child: GestureDetector(
+                        onTap: () async {
+                          DateTime? pickedDate = await showDatePicker(
+                              context: context,
+                              initialDate: DateTime.now(),
+                              firstDate: DateTime(1900),
+                              lastDate: DateTime.now());
+
+                          if (pickedDate != null) {
+                            String formattedDate =
+                                "${pickedDate.year}-${pickedDate.month}-${pickedDate.day}";
+                            choosePatientController.dobController.text =
+                                formattedDate;
+                          }
+                        },
+                        child: Icon(CupertinoIcons.calendar)),
                   ),
                   borderColor: HexColor("#90A4AE"),
                   contentPadding: EdgeInsets.only(
