@@ -100,7 +100,7 @@ class MyLabTestPage extends GetView<MyLabTestController> {
                                       width: double.infinity,
                                       height: 0.5,
                                       color: greyColor,
-                                    ).marginOnly(top: 18, bottom: 12),
+                                    ).marginOnly(top: 5, bottom: 12),
                                     Obx(() {
                                       return ListView.builder(
                                         physics:
@@ -114,6 +114,10 @@ class MyLabTestPage extends GetView<MyLabTestController> {
                                                 MainAxisAlignment.start,
                                             children: [
                                               Checkbox(
+                                                shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5)),
                                                 activeColor: orangeColor,
                                                 value: controller
                                                         .bookingStatusChecked[
@@ -136,7 +140,7 @@ class MyLabTestPage extends GetView<MyLabTestController> {
                                                 bold: FontWeight.normal,
                                               ),
                                             ],
-                                          ).marginOnly(bottom: 24);
+                                          ).marginOnly(bottom: 3);
                                         },
                                       );
                                     }),
@@ -162,6 +166,10 @@ class MyLabTestPage extends GetView<MyLabTestController> {
                                                 MainAxisAlignment.start,
                                             children: [
                                               Checkbox(
+                                                shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5)),
                                                 activeColor: orangeColor,
                                                 value: controller
                                                     .bookingTimeChecked[index],
@@ -183,7 +191,7 @@ class MyLabTestPage extends GetView<MyLabTestController> {
                                                 bold: FontWeight.normal,
                                               ),
                                             ],
-                                          ).marginOnly(bottom: 24);
+                                          ).marginOnly(bottom: 3);
                                         },
                                       );
                                     }),
