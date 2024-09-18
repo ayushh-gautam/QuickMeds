@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:quickmeds_user/app/modules/booking_success_module/booking_success_page.dart';
+import 'package:quickmeds_user/app/modules/booking_summary_module/booking_summary_page.dart';
 import 'package:quickmeds_user/app/modules/lab_test_module/lab_test_controller.dart';
 import 'package:sizer/sizer.dart';
 
@@ -187,7 +189,8 @@ class LabTestPage extends GetView<LabTestController> {
                                     onTap: () {
                                       Get.toNamed(
                                         Routes.LAB_TEST_DETAIL,
-                                        arguments: labbTests[index].id.toString(),
+                                        arguments:
+                                           labbTests[index].id.toString(),
                                       );
                                     },
                                     child: Container(
@@ -273,8 +276,8 @@ class LabTestPage extends GetView<LabTestController> {
                                                 ),
                                                 GestureDetector(
                                                   onTap: () {
-                                                    Get.toNamed(Routes
-                                                        .ADD_MEDICINE_REMINDER);
+                                                    Get.to(
+                                                        const BookingSummaryPage());
                                                   },
                                                   child: Container(
                                                     padding:
