@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:quickmeds_user/app/helper_widgets/submit_button_helper.dart';
 import 'package:quickmeds_user/app/helper_widgets/text_widget.dart';
@@ -9,7 +8,6 @@ import 'package:quickmeds_user/app/theme/app_colors.dart';
 import 'package:readmore/readmore.dart';
 import 'package:sizer/sizer.dart';
 
-import '../booking_success_module/booking_success_page.dart';
 
 ///
 ///
