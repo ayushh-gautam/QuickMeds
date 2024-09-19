@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -190,7 +191,7 @@ class LabTestPage extends GetView<LabTestController> {
                                       Get.toNamed(
                                         Routes.LAB_TEST_DETAIL,
                                         arguments:
-                                           labbTests[index].id.toString(),
+                                            labbTests[index].id.toString(),
                                       );
                                     },
                                     child: Container(
@@ -317,54 +318,118 @@ class LabTestPage extends GetView<LabTestController> {
                           SizedBox(
                             height: 2.h,
                           ),
-                          Container(
-                            padding: EdgeInsets.only(left: 4.w, top: 2.h),
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(1.2.h),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    TextWidget(
-                                        text:
-                                            "Book preventive checkup with our",
-                                        size: 9.sp,
-                                        color: greyColor,
-                                        bold: FontWeight.w600),
-                                    SizedBox(
-                                      height: 1.h,
+
+                          //////////////////////carousellll////////////////////
+                          CarouselSlider(
+                              carouselController:
+                                  labTestController.carouselController,
+                              options: CarouselOptions(
+                                initialPage: labTestController.currentIndex,
+                                onPageChanged: (int index, reason) {
+                                  labTestController.currentIndex = index;
+                                  labTestController.update();
+                                  print("INDEX:::$index REASON::$reason");
+                                },
+                                height: 28.h,
+                                viewportFraction: 1,
+                                scrollPhysics:
+                                    const AlwaysScrollableScrollPhysics(),
+                                enableInfiniteScroll: false,
+                                scrollDirection: Axis.horizontal,
+                              ),
+                              items: [
+                                // for(var i = 0; (homeScreenController.getCurrentLoadsResponse.body?.length ?? 0) <= 3
+                                //     ? i < (homeScreenController.getCurrentLoadsResponse.body?.length ?? 0)
+                                //     : i < 3;
+                                // i++)
+                                for (var i = 0; i <= 6 ? i < 5 : i < 6; i++)
+                                  Container(
+                                    padding:
+                                        EdgeInsets.only(left: 4.w, top: 2.h),
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius:
+                                          BorderRadius.circular(1.2.h),
                                     ),
-                                    TextWidget(
-                                        text: "Lab tests",
-                                        size: 20.sp,
-                                        color: greyColor,
-                                        bold: FontWeight.w700),
-                                    SizedBox(
-                                      height: 3.h,
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            TextWidget(
+                                                text:
+                                                    "Book preventive checkup with our",
+                                                size: 9.sp,
+                                                color: greyColor,
+                                                bold: FontWeight.w600),
+                                            SizedBox(
+                                              height: 1.h,
+                                            ),
+                                            TextWidget(
+                                                text: "Lab tests",
+                                                size: 20.sp,
+                                                color: greyColor,
+                                                bold: FontWeight.w700),
+                                            SizedBox(
+                                              height: 3.h,
+                                            ),
+                                            SizedBox(
+                                              width: 40.w,
+                                              child: SubmitButtonHelper(
+                                                text: "Book Now",
+                                                onTap: () {},
+                                                height: 5.6.h,
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                        Image(
+                                          image: const AssetImage(
+                                              "assets/images/health_medicine.png"),
+                                          height: 20.h,
+                                        )
+                                      ],
                                     ),
-                                    SizedBox(
-                                      width: 40.w,
-                                      child: SubmitButtonHelper(
-                                        text: "Book Now",
-                                        onTap: () {},
-                                        height: 5.6.h,
-                                      ),
-                                    )
-                                  ],
-                                ),
-                                Image(
-                                  image: AssetImage(
-                                      "assets/images/health_medicine.png"),
-                                  height: 20.h,
-                                )
-                              ],
-                            ),
+                                  ),
+                              ]),
+
+                          SizedBox(
+                            height: 1.h,
                           ),
+                          Container(
+                            height: 2.h,
+                            alignment: Alignment.center,
+                            child: ListView.builder(
+                                shrinkWrap: true,
+                                scrollDirection: Axis.horizontal,
+                                itemCount: 5,
+                                itemBuilder: (context, i) {
+                                  return Padding(
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 1.w),
+                                    child: Container(
+                                      width: 2.w,
+                                      decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          color:
+                                              labTestController.currentIndex ==
+                                                      i
+                                                  ? orangeColor
+                                                  : Colors.white),
+                                    ),
+                                  );
+                                }),
+                          ),
+                          SizedBox(
+                            height: 2.h,
+                          ),
+
+                          ////////////////////////////////////////////////////////////////
                           SizedBox(
                             height: 2.h,
                           ),
@@ -498,8 +563,8 @@ class LabTestPage extends GetView<LabTestController> {
                                               ),
                                               GestureDetector(
                                                 onTap: () {
-                                                  Get.toNamed(Routes
-                                                      .ADD_MEDICINE_REMINDER);
+                                                  Get.toNamed(
+                                                      Routes.BOOKING_SUMMARY);
                                                 },
                                                 child: Container(
                                                   padding: EdgeInsets.symmetric(
@@ -532,54 +597,120 @@ class LabTestPage extends GetView<LabTestController> {
                           SizedBox(
                             height: 2.h,
                           ),
-                          Container(
-                            padding: EdgeInsets.only(left: 4.w, top: 2.h),
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(1.2.h),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    TextWidget(
-                                        text:
-                                            "Book preventive checkup with our",
-                                        size: 9.sp,
-                                        color: greyColor,
-                                        bold: FontWeight.w600),
-                                    SizedBox(
-                                      height: 1.h,
+
+                          //////////carousel//////////////////////////////
+
+                          CarouselSlider(
+                              carouselController:
+                                  labTestController.carouselController,
+                              options: CarouselOptions(
+                                initialPage: labTestController.currentIndex,
+                                onPageChanged: (int index, reason) {
+                                  labTestController.currentIndex = index;
+                                  labTestController.update();
+                                  print("INDEX:::$index REASON::$reason");
+                                },
+                                height: 28.h,
+                                viewportFraction: 1,
+                                scrollPhysics:
+                                    const AlwaysScrollableScrollPhysics(),
+                                enableInfiniteScroll: false,
+                                scrollDirection: Axis.horizontal,
+                              ),
+                              items: [
+                                // for(var i = 0; (homeScreenController.getCurrentLoadsResponse.body?.length ?? 0) <= 3
+                                //     ? i < (homeScreenController.getCurrentLoadsResponse.body?.length ?? 0)
+                                //     : i < 3;
+                                // i++)
+                                for (var i = 0; i <= 6 ? i < 5 : i < 6; i++)
+                                  Container(
+                                    padding:
+                                        EdgeInsets.only(left: 4.w, top: 2.h),
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius:
+                                          BorderRadius.circular(1.2.h),
                                     ),
-                                    TextWidget(
-                                        text: "Lab tests",
-                                        size: 20.sp,
-                                        color: greyColor,
-                                        bold: FontWeight.w700),
-                                    SizedBox(
-                                      height: 3.h,
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            TextWidget(
+                                                text:
+                                                    "Book preventive checkup with our",
+                                                size: 9.sp,
+                                                color: greyColor,
+                                                bold: FontWeight.w600),
+                                            SizedBox(
+                                              height: 1.h,
+                                            ),
+                                            TextWidget(
+                                                text: "Lab tests",
+                                                size: 20.sp,
+                                                color: greyColor,
+                                                bold: FontWeight.w700),
+                                            SizedBox(
+                                              height: 3.h,
+                                            ),
+                                            SizedBox(
+                                              width: 40.w,
+                                              child: SubmitButtonHelper(
+                                                text: "Book Now",
+                                                onTap: () {},
+                                                height: 5.6.h,
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                        Image(
+                                          image: const AssetImage(
+                                              "assets/images/health_medicine.png"),
+                                          height: 20.h,
+                                        )
+                                      ],
                                     ),
-                                    SizedBox(
-                                      width: 40.w,
-                                      child: SubmitButtonHelper(
-                                        text: "Book Now",
-                                        onTap: () {},
-                                        height: 5.6.h,
-                                      ),
-                                    )
-                                  ],
-                                ),
-                                Image(
-                                  image: AssetImage(
-                                      "assets/images/health_medicine.png"),
-                                  height: 20.h,
-                                )
-                              ],
-                            ),
+                                  ),
+                              ]),
+
+                          SizedBox(
+                            height: 1.h,
                           ),
+                          Container(
+                            height: 2.h,
+                            alignment: Alignment.center,
+                            child: ListView.builder(
+                                shrinkWrap: true,
+                                scrollDirection: Axis.horizontal,
+                                itemCount: 5,
+                                itemBuilder: (context, i) {
+                                  return Padding(
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 1.w),
+                                    child: Container(
+                                      width: 2.w,
+                                      decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          color:
+                                              labTestController.currentIndex ==
+                                                      i
+                                                  ? orangeColor
+                                                  : Colors.white),
+                                    ),
+                                  );
+                                }),
+                          ),
+                          SizedBox(
+                            height: 2.h,
+                          ),
+
+                          /////carousel end
+
                           SizedBox(
                             height: 2.h,
                           ),
@@ -683,8 +814,8 @@ class LabTestPage extends GetView<LabTestController> {
                                               ),
                                               GestureDetector(
                                                 onTap: () {
-                                                  Get.toNamed(Routes
-                                                      .ADD_MEDICINE_REMINDER);
+                                                  Get.toNamed(
+                                                      Routes.BOOKING_SUMMARY);
                                                 },
                                                 child: Container(
                                                   padding: EdgeInsets.symmetric(
