@@ -13,6 +13,8 @@ class ChoosePatientController extends GetxController {
   final dobController = TextEditingController();
   var selectedGender = ''.obs;
   var isLoading = false.obs;
+  var iseditPatientTapped = false.obs;
+  final editPatientKey = GlobalKey<FormState>();
 
   Rx<GetPatient>? getPatient = GetPatient().obs;
 
@@ -47,6 +49,8 @@ class ChoosePatientController extends GetxController {
           patientName: patientNameController.text,
           dob: dobController.text,
           gender: selectedGender.value);
+
+      if (!editPatientKey.currentState!.validate()) return;
 
       await patientRepo.updatePatient(patientId, newPatient);
       getPatientList();
