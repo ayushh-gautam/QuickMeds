@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:get/get.dart';
 import 'package:quickmeds_user/api_collection/api_models/get_lab_tests_model.dart';
 import 'package:quickmeds_user/api_collection/repo/lab_test_repo.dart';
@@ -11,6 +12,9 @@ class LabTestController extends GetxController {
   // set obj(value) => _obj.value = value;
   // get obj => _obj.value;
 
+  int currentIndex = 0;
+
+  CarouselController carouselController = CarouselController();
   @override
   void onInit() {
     super.onInit();
