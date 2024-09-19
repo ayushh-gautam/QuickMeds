@@ -11,6 +11,8 @@ class AddPatientController extends GetxController {
   final patientNameController = TextEditingController();
   final dobController = TextEditingController();
   var selectedGender = 'Male'.obs;
+  var isAddPatientTapped = false.obs;
+  final addPatientKey = GlobalKey<FormState>();
 
   Future<void> addPatient() async {
     PatientRepo patientRepo = PatientRepo();
@@ -21,6 +23,8 @@ class AddPatientController extends GetxController {
           patientName: patientNameController.text,
           dob: dobController.text,
           gender: selectedGender.value);
+
+      if (!addPatientKey.currentState!.validate()) return;
 
       await patientRepo.addPatient(newPatient);
     } catch (e) {
