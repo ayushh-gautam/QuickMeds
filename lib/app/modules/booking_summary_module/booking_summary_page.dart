@@ -8,7 +8,6 @@ import 'package:quickmeds_user/app/theme/app_colors.dart';
 import 'package:readmore/readmore.dart';
 import 'package:sizer/sizer.dart';
 
-
 ///
 ///
 
@@ -77,7 +76,7 @@ class _BookingSummaryPageState extends State<BookingSummaryPage> {
                 ),
               ],
             )),
-        backgroundColor: appBgColor,
+        backgroundColor: const Color(0xffF5F5F5),
         appBar: AppBar(
           elevation: 0,
           backgroundColor: appBgColor,
@@ -247,13 +246,54 @@ class _BookingSummaryPageState extends State<BookingSummaryPage> {
             size: 16,
             bold: FontWeight.normal,
             color: greyColor,
-          ),
-          const SizedBox(
-            height: 24,
-          ),
-          ListTile(
-            contentPadding: const EdgeInsets.all(0),
-            leading: Container(height: 100, width: 60, color: Colors.red),
+          ).marginOnly(bottom: 10),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              SizedBox(
+                  width: 24.w,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(12),
+                    child: Image.asset("assets/images/Frame 1171275762.png"),
+                  )),
+              SizedBox(
+                width: 2.w,
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    width: 50.w,
+                    child: TextWidget(
+                      text:
+                          "Comprehensive gold full body checkup with smart report",
+                      size: 12.sp,
+                      bold: FontWeight.normal,
+                      color: greyColor,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 0.6.h,
+                  ),
+                  SizedBox(
+                    height: 1.h,
+                  ),
+                  TextWidget(
+                    text: 'E-report by Fri,01 Mar',
+                    size: 16,
+                    bold: FontWeight.normal,
+                    color: orangeColor,
+                  )
+                ],
+              ),
+              TextWidget(
+                text: '₹2199',
+                size: 18,
+                bold: FontWeight.normal,
+                color: greyColor,
+              )
+            ],
           )
         ],
       ).marginSymmetric(horizontal: 18),
@@ -393,7 +433,8 @@ class _BookingSummaryPageState extends State<BookingSummaryPage> {
               height: 55,
               width: 55,
               decoration: BoxDecoration(
-                  color: Colors.red, borderRadius: BorderRadius.circular(200)),
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(200)),
               child: bookingSummaryController.icons[index]),
           title: TextWidget(
             text: bookingSummaryController.title[index],
