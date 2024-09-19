@@ -1,15 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 import 'package:quickmeds_user/app/helper_widgets/hex_color.dart';
 import 'package:quickmeds_user/app/helper_widgets/submit_button_helper.dart';
-import 'package:quickmeds_user/app/modules/choose_patient_module/choose_patient_controller.dart';
 import 'package:sizer/sizer.dart';
 import '../../helper_widgets/text_widget.dart';
 import '../../helper_widgets/textfield_widget.dart';
-import '../../routes/app_pages.dart';
 import 'package:quickmeds_user/app/modules/add_patient_module/add_patient_controller.dart';
 
 import '../../theme/app_colors.dart';
@@ -88,6 +85,7 @@ class AddPatientPage extends GetView<AddPatientController> {
                       TextFieldWidget(
                           labelTextFontWeight: FontWeight.w600,
                           hintText: "Enter  patient’s name",
+                          
                           fillColor: Colors.white,
                           textAlign: TextAlign.start,
                           textInputFormatter: const [],
