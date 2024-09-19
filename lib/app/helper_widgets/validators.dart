@@ -12,6 +12,19 @@ class Validators {
     return null;
   }
 
+  String? validateName(String? name) {
+    if ((name ?? "").trim().isEmpty) {
+      return "Patient name can't be empty";
+    }
+    if ((name ?? "").trim().length < 3) {
+      return "Patient name should have minimum 8 characters";
+    }
+    if ((name ?? "").trim().length > 30) {
+      return "Patient name should have maximum 30 characters";
+    }
+    return null;
+  }
+
   String? validateLastName(String? name) {
     if ((name ?? "").trim().isNotEmpty) {
       if ((name ?? "").trim().length < 3) {
