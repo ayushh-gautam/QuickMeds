@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quickmeds_user/app/helper_widgets/hex_color.dart';
+import 'package:quickmeds_user/app/modules/add_payment_module/add_payment_page.dart';
 import 'package:sizer/sizer.dart';
 import '../../helper_widgets/text_widget.dart';
 import '../../theme/app_colors.dart';
@@ -166,7 +167,9 @@ class WalletScreenPage extends GetView<WalletScreenController> {
                                 height: 4.h,
                               ),
                               GestureDetector(
-                                onTap: () {},
+                                onTap: () {
+                                  Get.to(const AddPaymentPage());
+                                },
                                 child: Container(
                                   padding:
                                       EdgeInsets.symmetric(vertical: 1.8.h),
