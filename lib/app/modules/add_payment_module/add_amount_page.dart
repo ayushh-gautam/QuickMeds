@@ -12,6 +12,7 @@ class AddAmountPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      
       appBar: AppBar(
         elevation: 0,
         backgroundColor: appBgColor,
@@ -44,7 +45,7 @@ class AddAmountPage extends StatelessWidget {
         ),
         centerTitle: true,
       ),
-      body: Column(
+      body: ListView(
         children: [
           Center(
             child: Image.asset(
